@@ -1,0 +1,24 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static '/folios2/index.css' %}" />
+
+<html>
+    
+<head></head>
+
+    
+<body>
+{% block content %}
+
+<h1>Delete Portfolio</h1>
+
+<p>Are you sure you want to delete the portfolio: {{ portfolio.name }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Yes, delete." />
+</form>
+
+{% endblock %}
+</body>
+</html>

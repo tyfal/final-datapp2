@@ -1,0 +1,190 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/folios2/index.css' %}" />
+
+<html>
+
+<head>
+  
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Numeric JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
+</head>
+
+<body>
+
+{% if user.username %}
+    <p>You are logged in as <a href="{% url 'folios2:profile' %}">{{ user.username|safe }}</a></p>
+{% else %}
+    <a href="{% url 'folios2:login' %}">login</a>
+{% endif %}
+
+    
+<h1 id="title">Folios2</h1> 
+
+
+{% if portfolio_list %}
+
+<script>
+var count = 0;
+    
+var title = document.getElementById("title");
+  title.style.position="absolute";
+  title.style.top=window.innerHeight*.05;
+  title.style.width="100%";
+  title.style.textAlign="center";
+</script>
+
+
+  {% for portfolio in portfolio_list|slice:":5" %}
+
+  <script>
+      
+    var header = document.createElement("h2");
+      header.setAttribute("id", "{{ portfolio.name|safe }}");
+      header.style.top=window.innerHeight*(.6*count+.05);
+      header.style.position="absolute";
+      header.style.height=window.innerHeight*.1;
+      header.style.zIndex=2;
+      document.body.appendChild(header);
+      
+    var anchor = document.createElement("a");
+      anchor.setAttribute("href","/folios2/{{ portfolio.name }}/");
+      anchor.textContent="{{ portfolio.name|safe }}";
+      
+    document.getElementById("{{ portfolio.name|safe }}").appendChild(anchor);
+
+     var div = document.createElement("DIV");
+     div.setAttribute("id", "{{ portfolio.name|safe }}-pie");
+     div.style.position = "absolute";
+     div.style.top = window.innerHeight*(.6*count+.25);
+     div.style.left = window.innerWidth*.05;
+     document.body.appendChild(div);
+
+  /*var colorWheel = ['#7C606B', '#93C6D6', '#EDADC7', '#BCB6FF', '#C7CEDB']; */
+
+  var data1 = [{
+    values: {{ qty_by_port }}[count],
+    labels: {{ stock_by_port|safe }}[count],
+    type: 'pie',
+    marker: {
+        colors: ['#2D3047', '#51132B', '#AF9164', '#778DA9', '#508484', '#5F506B', '#677DB7', '#60712F', '#A33B20']
+    },
+    textposition: "inside",
+    hole: .75,
+    color: '#5EFC8D',
+    textinfo: 'none',
+    }];
+      
+  var layout = {
+      height: window.innerHeight*.5,
+      width: window.innerWidth*.5,
+      plot_bgcolor:'rgba(0,0,0,0)',
+      paper_bgcolor:'rgba(0,0,0,0)',
+      legend: {
+          x: 0,
+          y: 1,
+          font: {
+              size: 15,
+              color: '#4F7CAC'
+          },
+      },
+      annotations: [
+          {
+              showarrow: false,
+              text: "Folio Mix",
+              font: {
+                  size: 20,
+                  color: '#4F7CAC'
+              }
+          }
+      ],
+  };
+
+  Plotly.newPlot('{{ portfolio.name|safe }}-pie', data1, layout);
+       
+  var colorWheel = ['#2D3047', '#51132B', '#AF9164', '#778DA9', '#508484', '#5F506B', '#677DB7', '#60712F', '#A33B20'];
+  
+  var traceArray = new Array();
+       
+  for (i=0; i < {{ stock_by_port|safe }}[count].length; i++) {
+
+    console.log(":)");
+      
+    var trace = {
+        x: {{ port_date|safe }}[count],
+        y: {{ close_by_port }}[count][i],
+        name: {{ stock_by_port|safe }}[count][i],
+        type: 'bar',
+        opacity: .6,
+        marker: {
+            color: colorWheel[i]
+        }
+    };
+       
+    traceArray.push(trace);
+      
+      }
+    
+    var traceLine = {
+        x: {{ port_date|safe }}[count],
+        y: {{ worth }}[count],
+        type: 'scatter',
+        line: {
+            color: '#4AA4A5'
+        },
+        name: "{{ portfolio.name|safe }}"
+      };
+       
+    traceArray.push(traceLine);
+          
+    var div = document.createElement("DIV");
+     div.setAttribute("id", "{{ portfolio.name|safe }}-worth");
+     div.style.position = "absolute";
+     div.style.left = window.innerWidth*.4;
+     div.style.top = window.innerHeight*(.6*count+.25);
+     document.body.appendChild(div);
+      
+    var layout = {
+        height: window.innerHeight*.5,
+        width: window.innerWidth*.6,
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        xaxis: {
+            nticks: 5,
+            title: "Date",
+            showline: true,
+            gridcolor: '#4F7CAC',
+            color: '#4F7CAC'
+        },
+        yaxis: {
+            title: "Total Value ($)",
+            showline: true,
+            gridcolor:'#4F7CAC',
+            color: '#4F7CAC',},
+        barmode:'stack',
+        showlegend: false
+    };
+
+    Plotly.newPlot("{{ portfolio.name|safe }}-worth", traceArray,layout);
+      
+    var ports = document.getElementById("{{ portfolio.name|safe }}");
+      
+    ports.style.top = window.innerHeight*(.6*count+.2);
+
+    count += 1;
+
+    </script> 
+        
+
+  {% endfor %}
+
+{% else %}
+
+  <p>No portfolios available :(</p>
+
+{% endif %}
+</body>
+
+</html>

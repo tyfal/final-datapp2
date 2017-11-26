@@ -1,0 +1,129 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/folios2/detail.css' %}" />
+
+<html>
+
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+    
+<body>
+
+<ul>
+<li><a href="{% url 'folios2:profile' %}">Profile</a></li>
+<li><a href="{% url 'folios2:index' %}">Home</a></li>
+</ul>
+
+<h1>{{ portfolio }}</h1>
+    
+<br>
+<br>
+
+<script> var count = 0; </script>
+
+{% for stock in stock_list %}
+
+<h3>{{ stock }}</h3>
+
+<div id="{{ stock }}"></div>
+    
+<br><br>
+    
+<form action="{% url 'folios2:stock-delete' stock.pk|safe %}">
+    {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
+    <button type="submit">Delete {{ stock.stock_symbol }}</button>
+</form>
+    
+<form action="{% url 'folios2:income-statement' stock.pk|safe %}">
+    {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
+    <button type="submit">Get {{ stock.stock_symbol }} income statements</button>
+</form>
+
+<button onclick="show_{{ stock }}_tenk()">10-K</button>
+        
+<button onclick="show_{{ stock }}_tenq()">10-Q</button>
+    
+<div id="{{ stock }}_10k" style="display:none;"></div>
+    
+<div id="{{ stock }}_10q" style="display:none;"></div>
+    
+<script>
+
+var data = [
+  {
+    x: {{ date_list|safe }}[count],
+    y: {{ close_list|safe }}[count],
+    type: 'scatter'
+  },
+  {
+    x: {{ date_list|safe }}[count],
+    y: {{ close_list|safe }}[count],
+    type: 'bar',        
+    opacity: .6,
+    line: {
+        color: "#4AA4A5"
+    },
+    marker: {
+        color: "#EAFFFD"
+    }
+  }
+];
+    
+  var layout = {
+        height: window.innerHeight*.5,
+        width: window.innerWidth*.8,
+        plot_bgcolor:'#424B54',
+        paper_bgcolor:'#424B54',
+        xaxis: {
+            nticks: 5,
+            title: "Date",
+            showline: true,
+            gridcolor: '#4F7CAC',
+            color: '#4F7CAC'
+        },
+        yaxis: {
+            title: "Total Value ($)",
+            showline: true,
+            gridcolor:'#4F7CAC',
+            color: '#4F7CAC'
+        },
+    };
+
+Plotly.newPlot('{{ stock }}', data, layout);
+    
+var tenk = '{{ stock.income_statement_10k|safe }}';
+    
+document.getElementById("{{ stock }}_10k").innerHTML = tenk;
+    
+var tenq = '{{ stock.income_statement_10q|safe }}';
+    
+document.getElementById("{{ stock }}_10q").innerHTML = tenq;
+    
+function show_{{ stock }}_tenk() {
+    var x = document.getElementById("{{ stock }}_10k");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+};
+    
+function show_{{ stock }}_tenq() {
+    var x = document.getElementById("{{ stock }}_10q");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+};
+    
+count += 1;
+    
+</script>
+ 
+{% endfor %}
+    
+</body>
+    
+</html>
