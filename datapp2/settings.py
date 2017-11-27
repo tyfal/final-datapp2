@@ -28,8 +28,7 @@ SECRET_KEY = '7kl-x2_-$4l*q$0wfd9tl_a+lj_zr)!28(hai4-wmquz=%cci2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['datapp2.herokuapp.com']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'datapp2.herokuapp.com']
 
 # Application definition
 
@@ -137,9 +136,5 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+db_from_env = dj_database_url.config(conn_max_age=600)
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-
-DATABASES['default'].update(db_from_env)
