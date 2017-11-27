@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'datapp2',
-        'USER': 'tyfal',
-        'PASSWORD': '',
+        'USER': 'django',
+        'PASSWORD': 'somepassword',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -124,7 +124,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 
