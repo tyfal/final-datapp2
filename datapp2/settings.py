@@ -84,7 +84,7 @@ DATABASES = {
         'USER': 'django',
         'PASSWORD': 'somepassword',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -137,4 +137,4 @@ STATICFILES_DIRS = (
 )
 
 db_from_env = dj_database_url.config(conn_max_age=600)
-
+DATABASES['default'].update(db_from_env)
