@@ -28,7 +28,7 @@ SECRET_KEY = '7kl-x2_-$4l*q$0wfd9tl_a+lj_zr)!28(hai4-wmquz=%cci2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'datapp2.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 # Application definition
 
