@@ -18,6 +18,8 @@
     <p>You are logged in as <a href="{% url 'folios2:profile' %}">{{ user.username|safe }}</a></p>
 {% else %}
     <a href="{% url 'folios2:login' %}">login</a>
+    <br>
+    <a href="{% url 'folios2:register' %}">register</a>
 {% endif %}
 
     
