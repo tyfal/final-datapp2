@@ -90,9 +90,10 @@ p {
     
 }
 
-p .no_folios {
+#no_folios {
     
-    left: 45vw;
+    position: absolute;
+    left: 35vw;
     top: 45%;
     
 }
