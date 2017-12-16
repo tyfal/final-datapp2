@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'datapp2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'datapp2',
-        'USER': 'django',
-        'PASSWORD': 'somepassword',
+        'NAME': 'folios',
+        'USER': 'tyfal',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
