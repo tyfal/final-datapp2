@@ -51,22 +51,24 @@ class Stock(models.Model):
 
 
     def Financial(self):
+        
+        quandl.ApiConfig.api_key = 'zo7kqTM5GbbuJUNsTKVa'
 
         start_date = self.portfolio.start_date
 
         end_date = self.portfolio.end_date
 
-        df = quandl.get('WIKI/'+self.stock_symbol, start_date=start_date, end_date=end_date)
+        df = quandl.get('EOD/'+self.stock_symbol, start_date=start_date, end_date=end_date)
 
         Values = df.values
 
-        High = df['Adj. High'].values
+        High = df['Adj_High'].values
 
-        Low = df['Adj. Low'].values
+        Low = df['Adj_Low'].values
 
-        Open = df['Adj. Open'].values
+        Open = df['Adj_Open'].values
 
-        Close = df['Adj. Close'].values
+        Close = df['Adj_Close'].values
         
         df.str_date = []
             

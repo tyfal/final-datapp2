@@ -283,7 +283,7 @@ def recentIS(s, form_type):
 
             for txt in text:
 
-                if txt in str(t).lower():
+                if txt in str(t).lower() and len(t) < 100000:
 
                     txtCount += 1
 
