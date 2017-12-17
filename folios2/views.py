@@ -249,9 +249,15 @@ class StockDelete(DeleteView):
     
 def IncomeStatement(request, pk):
     
-    s = Stock.objects.filter(pk=pk)[0]
+    try:
+    
+        s = Stock.objects.filter(pk=pk)[0]
+
+        income_statement(s)
         
-    income_statement(s)
+    except:
+        
+        pass
     
     return redirect('folios2:detail', s.portfolio)
         
