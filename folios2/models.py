@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
-import datetime
+import datetime, quandl
 from django.contrib.auth.models import User
 from pandas_datareader import data
 import pandas as pd
@@ -52,23 +52,21 @@ class Stock(models.Model):
 
     def Financial(self):
 
-        data_source = 'google'
-
         start_date = self.portfolio.start_date
 
         end_date = self.portfolio.end_date
 
-        df = data.DataReader(self.stock_symbol, data_source, start_date, end_date)
+        df = quandl.get('WIKI/'+self.stock_symbol, start_date=start_date, end_date=end_date)
 
         Values = df.values
 
-        High = df['High'].values
+        High = df['Adj. High'].values
 
-        Low = df['Low'].values
+        Low = df['Adj. Low'].values
 
-        Open = df['Open'].values
+        Open = df['Adj. Open'].values
 
-        Close = df['Close'].values
+        Close = df['Adj. Close'].values
         
         df.str_date = []
             
