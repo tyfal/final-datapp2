@@ -45,9 +45,9 @@ class Stock(models.Model):
 
     quantity = models.IntegerField(default=1)
     
-    income_statement_10k = models.CharField(max_length=10000, null=True, blank=True)
+    income_statement_10k = models.CharField(max_length=100000, null=True, blank=True)
     
-    income_statement_10q = models.CharField(max_length=10000, null=True, blank=True)
+    income_statement_10q = models.CharField(max_length=100000, null=True, blank=True)
 
 
     def Financial(self):
