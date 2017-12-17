@@ -26,7 +26,7 @@ LOGOUT_REDIRECT_URL = 'folios2:index'
 SECRET_KEY = '7kl-x2_-$4l*q$0wfd9tl_a+lj_zr)!28(hai4-wmquz=%cci2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -133,7 +133,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join('datapp2', 'static'),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 db_from_env = dj_database_url.config(conn_max_age=600)
