@@ -1,3 +1,5 @@
+
+
 body {
     font-family: monaco;
     background: #424B54; /* For browsers that do not support gradients */
@@ -7,6 +9,7 @@ body {
     background: radial-gradient(#424B54 ,#374b5d , #32414e ); /* Standard syntax */
     text-decoration: none;
     color: #C6EBBE;
+    height: 100%;
 }
 
 h3 {
