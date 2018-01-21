@@ -1,4 +1,7 @@
-
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
 
 body {
     font-family: monaco;
@@ -9,7 +12,6 @@ body {
     background: radial-gradient(#424B54 ,#374b5d , #32414e ); /* Standard syntax */
     text-decoration: none;
     color: #C6EBBE;
-    height: 100%;
 }
 
 h3 {
@@ -91,6 +93,16 @@ p {
     padding: 0;
     float: left;
     
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
 
 
