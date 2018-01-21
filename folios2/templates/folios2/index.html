@@ -13,6 +13,8 @@
 </head>
 
 <body>
+    
+<div style="position:fixed; background-color: #222524; text-align: center; font-size:15px;padding: 1rem;z-index:5;">
 
 {% if user.username %}
     <p>You are logged in as <a href="{% url 'folios2:profile' %}">{{ user.username|safe }}</a></p>
@@ -21,7 +23,8 @@
     <br>
     <a href="{% url 'folios2:register' %}">register</a>
 {% endif %}
-
+    
+</div>
     
 <h1 id="title">Folios2</h1> 
 
@@ -189,7 +192,7 @@ var title = document.getElementById("title");
 
 {% endif %}
     
-<div class="footer">© 2018 Ty Fal</div>
+<div class="footer" style="position: fixed; bottom: 2.5%; background-color: #222524; text-align: center; font-size:10px;padding: 1rem;z-index:5;">© 2018 Ty Fal</div>
     
 </body>
 
