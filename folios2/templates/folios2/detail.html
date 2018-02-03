@@ -43,9 +43,16 @@
     <button type="submit" style="background-color: #40789E;">Get {{ stock.stock_symbol }} income statements</button>
 </form>
 
+{% if stock.income_statement_10k %}
 <button onclick="show_{{ stock }}_tenk()">10-K</button>
+    
+{% endif %}
+    
+{% if stock.income_statement_10q %}
         
 <button onclick="show_{{ stock }}_tenq()">10-Q</button>
+    
+{% endif %}
     
 <div id="{{ stock }}_10k" style="display:none;"></div>
     
