@@ -9,12 +9,13 @@
 </head>
     
 <body>
-
-<ul>
-<li><a href="{% url 'folios2:profile' %}">Profile</a></li>
-<li><a href="{% url 'folios2:index' %}">Home</a></li>
-</ul>
-
+<div style="position:fixed; background-color: #222524; text-align: left; font-size:15px;padding: 1rem;z-index:5;">
+    <ul>
+        <li><a href="{% url 'folios2:profile' %}">Profile</a></li>
+        <li><a href="{% url 'folios2:index' %}">Home</a></li>
+    </ul>
+</div>
+    
 <h1>{{ portfolio }}</h1>
     
 <br>

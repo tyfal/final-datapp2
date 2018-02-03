@@ -14,14 +14,14 @@
 
 <body>
     
-<div style="position:fixed; background-color: #222524; text-align: center; font-size:15px;padding: 1rem;z-index:5;">
+<div style="position:fixed; background-color: #222524; text-align: left; font-size:15px;padding: 1rem;z-index:5;">
 
 {% if user.username %}
     <p>You are logged in as <a href="{% url 'folios2:profile' %}">{{ user.username|safe }}</a></p>
 {% else %}
     <a href="{% url 'folios2:login' %}">login</a>
     <br>
-    <a href="{% url 'folios2:register' %}">register</a>
+    <a href="{% url 'folios2:register' %}">sign up</a>
 {% endif %}
     
 </div>
