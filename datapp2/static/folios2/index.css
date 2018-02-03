@@ -40,7 +40,9 @@ a {
     border-bottom-right-radius: 10%;
     position: fixed;
     z-index: 5;
-    
+    transition-delay: 1s; /* delays for 1 second */
+    -webkit-transition-delay: 1s; /* for Safari & Chrome */
+    transition: ease-out 1s 0s;
 }
 
 .form-box:hover {
@@ -53,6 +55,7 @@ a {
     border-bottom-right-radius: 10%;
     position: fixed;
     z-index: 5;
+    transition: ease-out .5s 0s;
     
 }
 

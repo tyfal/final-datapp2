@@ -47,7 +47,7 @@ var title = document.getElementById("title");
   <script>
       
     var header = document.createElement("h2");
-      header.setAttribute("id", "{{ portfolio.name|safe }} [{{ portfolio.user|safe }}]");
+      header.setAttribute("id", "{{ portfolio.name|safe }}");
       header.style.top=window.innerHeight*(.6*count+.05);
       header.style.position="absolute";
       header.style.height=window.innerHeight*.1;
@@ -55,9 +55,16 @@ var title = document.getElementById("title");
       header.style.zIndex=2;
       document.body.appendChild(header);
       
+      
     var anchor = document.createElement("a");
       anchor.setAttribute("href","/folios2/{{ portfolio.name }}/");
       anchor.textContent="{{ portfolio.name|safe }}";
+      
+    {% if portfolio.user %}
+    
+        anchor.textContent="{{ portfolio.name|safe }} - {{ portfolio.user|safe }}"
+    
+    {% endif %}
       
     document.getElementById("{{ portfolio.name|safe }}").appendChild(anchor);
 
@@ -151,7 +158,7 @@ var title = document.getElementById("title");
      div.style.left = window.innerWidth*.4;
      div.style.top = window.innerHeight*(.6*count+.25);
      document.body.appendChild(div);
-      
+
     var layout = {
         height: window.innerHeight*.5,
         width: window.innerWidth*.6,
@@ -182,7 +189,6 @@ var title = document.getElementById("title");
     count += 1;
 
     </script> 
-        
 
   {% endfor %}
 
