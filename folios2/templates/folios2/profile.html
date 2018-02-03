@@ -15,11 +15,13 @@
 <body>
     
 <h1 id="title">{{ user }}'s Portfolios</h1>
-    
-<ul>
-<li><a href="{% url 'folios2:logout' %}">logout</a></li>
-<li><a href="{% url 'folios2:index' %}">Home</a></li>
-</ul>
+
+<div style="position:fixed; background-color: #222524; text-align: left; font-size:15px;padding: 1rem;z-index:5;">
+    <ul>
+        <li><a href="{% url 'folios2:logout' %}">logout</a></li>
+        <li><a href="{% url 'folios2:index' %}">Home</a></li>
+    </ul>
+</div>
     
 <iframe src="../{{ user|safe }}/portfolio/add" class="form-box" id="portfolio-add-form">Portfolio</iframe>
     
