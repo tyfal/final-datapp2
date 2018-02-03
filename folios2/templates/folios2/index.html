@@ -47,7 +47,7 @@ var title = document.getElementById("title");
   <script>
       
     var header = document.createElement("h2");
-      header.setAttribute("id", "{{ portfolio.name|safe }}");
+      header.setAttribute("id", "{{ portfolio.name|safe }} [{{ portfolio.user|safe }}]");
       header.style.top=window.innerHeight*(.6*count+.05);
       header.style.position="absolute";
       header.style.height=window.innerHeight*.1;
