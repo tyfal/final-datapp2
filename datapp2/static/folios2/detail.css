@@ -7,6 +7,7 @@ body {
     background: radial-gradient(#424B54 ,#374b5d ); /* Standard syntax */
     text-decoration: none;
     color: #C6EBBE;
+    margin-left: 5%;
 }
 
 h1 {
@@ -30,7 +31,7 @@ table {
 }
 
 tr {
-    background: #424B54 !important;
+    background: rgba(0,0,0,0) !important;
     font-family: monaco !important;
     background-color: #424B54 !important;
     text-decoration: none !important;
@@ -39,7 +40,7 @@ tr {
 }
 
 td {
-    background: #424B54 !important;
+    background: rgba(0,0,0,0) !important;
     font-family: monaco !important;
     background-color: #424B54 !important;
     text-decoration: none !important;
@@ -64,4 +65,18 @@ a {
     text-decoration: underline;
     font-family: monaco;
     color: #C6EBBE; 
+}
+
+button {
+    font-family: monaco;
+    background-color: #C6EBBE; 
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    float: right;
+    margin-right: 2.5%;
+    margin-bottom: 10%;
 }

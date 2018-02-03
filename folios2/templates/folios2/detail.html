@@ -31,14 +31,16 @@
     
 <br><br>
     
+<div id="buttons">
+    
 <form action="{% url 'folios2:stock-delete' stock.pk|safe %}">
     {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
-    <button type="submit">Delete {{ stock.stock_symbol }}</button>
+    <button type="submit" style="background-color: #7A4948;">Delete {{ stock.stock_symbol }}</button>
 </form>
     
 <form action="{% url 'folios2:income-statement' stock.pk|safe %}">
     {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
-    <button type="submit">Get {{ stock.stock_symbol }} income statements</button>
+    <button type="submit" style="background-color: #40789E;">Get {{ stock.stock_symbol }} income statements</button>
 </form>
 
 <button onclick="show_{{ stock }}_tenk()">10-K</button>
@@ -48,6 +50,8 @@
 <div id="{{ stock }}_10k" style="display:none;"></div>
     
 <div id="{{ stock }}_10q" style="display:none;"></div>
+    
+</div>
     
 <script>
 
@@ -122,6 +126,11 @@ function show_{{ stock }}_tenq() {
 count += 1;
     
 </script>
+    
+<br>
+<br>
+<br>
+<br>
  
 {% endfor %}
     
