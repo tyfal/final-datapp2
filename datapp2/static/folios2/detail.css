@@ -9,14 +9,6 @@ body {
     color: #C6EBBE;
 }
 
-body {
-    font-family: monaco;
-    background-color: #424B54;
-    text-decoration: none;
-    color: #C6EBBE;
-    margin-left: 5%;
-}
-
 h1 {
     text-align: center;
 }
@@ -24,13 +16,12 @@ h1 {
 
 h2 {
     font-family: monaco;
-    background-color: #424B54;
     color: #C6EBBE;
-    margin-left: 20vw;
+    margin-left: 20%;
 }
 
 table {
-    background: #424B54 !important;
+    background: rgba(0,0,0,0) !important;
     font-family: monaco !important;
     background-color: #424B54 !important;
     text-decoration: none !important;
