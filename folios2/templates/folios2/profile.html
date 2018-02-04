@@ -186,7 +186,7 @@ var title = document.getElementById("title");
     
     <form action="{% url 'folios2:portfolio-delete' portfolio.pk|safe %}" id="{{ portfolio.name|safe }}-delete">
     {% csrf_token %}<input type="hidden" name="portfolio_pk" value="{{ portfolio.pk }}">
-    <button type="submit" style="background-color: 7A4948; border: none; float: right;">Delete {{ portfolio.name }}</button>
+    <button type="submit" style="background-color: 7A4948; border: none; float: right; font-family: monaco;">Delete {{ portfolio.name }}</button>
     </form>
     
     <script>
@@ -203,7 +203,7 @@ var title = document.getElementById("title");
 
 {% else %}
 
-  <p id="no_folios">No portfolios available :(</p>
+  <p id="no_folios">Add a portfolio with the forms on the right -> -></p>
 
 {% endif %}
     
