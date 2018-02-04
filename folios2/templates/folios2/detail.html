@@ -42,21 +42,34 @@
     {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
     <button type="submit" style="background-color: #40789E;">Get {{ stock.stock_symbol }} income statements</button>
 </form>
+    
+<form action="{% url 'folios2:links' stock.pk|safe %}">
+    {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
+    <button type="submit" style="background-color: #AF894F;">Get {{ stock.stock_symbol }} form links</button>
+</form>
 
 {% if stock.income_statement_10k %}
-<button onclick="show_{{ stock }}_tenk()">10-K</button>
+<button onclick="show_{{ stock }}_tenk()">{{ stock }} 10-K</button>
     
 {% endif %}
     
 {% if stock.income_statement_10q %}
         
-<button onclick="show_{{ stock }}_tenq()">10-Q</button>
+<button onclick="show_{{ stock }}_tenq()">{{ stock }} 10-Q</button>
+    
+{% endif %}
+    
+{% if stock.form_links %}
+    
+<button onclick="show_{{ stock }}_10q_links()" style="background-color: #DBD383;">Show {{ stock }} 10-Q Links</button>
     
 {% endif %}
     
 <div id="{{ stock }}_10k" style="display:none;"></div>
     
 <div id="{{ stock }}_10q" style="display:none;"></div>
+    
+<div id="{{ stock }}_10q_links" style="display:none;"></div>
     
 </div>
     
@@ -87,6 +100,7 @@ var data = [
         width: window.innerWidth*.8,
         paper_bgcolor: 'rgba(0,0,0,0)',
         plot_bgcolor: 'rgba(0,0,0,0)',
+        showlegent: false,
         xaxis: {
             nticks: 5,
             title: "Date",
@@ -112,6 +126,39 @@ var tenq = '{{ stock.income_statement_10q|safe }}';
     
 document.getElementById("{{ stock }}_10q").innerHTML = tenq;
     
+{% if stock.form_links %}
+  
+var links, lLen, i, month;
+
+links = {{ stock.form_links|safe }};
+lLen = links.length;
+
+var q_mo = ['September', 'June', 'March'];
+
+for (i=0; i<lLen; i++) {
+    
+    var str = "{{ stock.portfolio.start_date }}"
+    
+    var year = Number(str.substring(str.length-4,str.length)) + Math.floor(lLen/3) - Math.floor(i/3);
+    
+    month = q_mo[i%3];
+    
+    var button = document.createElement("button");
+    
+    button.setAttribute("onclick","window.open('"+links[i]+"')");
+    
+    button.setAttribute("margin", "10%");
+    
+    var t = document.createTextNode("{{ stock }} 10-Q "+ month + " " + year);
+    
+    button.appendChild(t);
+    
+    document.getElementById("{{ stock }}_10q_links").appendChild(button);
+    
+}
+    
+{% endif %}
+
 function show_{{ stock }}_tenk() {
     var x = document.getElementById("{{ stock }}_10k");
     if (x.style.display === "none") {
@@ -129,6 +176,22 @@ function show_{{ stock }}_tenq() {
         x.style.display = "none";
     }
 };
+ 
+ function show_{{ stock }}_10q_links() {
+     
+     var x = document.getElementById("{{ stock }}_10q_links");
+     
+     if (x.style.display === "none") {
+         
+         x.style.display = "block";
+         
+     } else {
+         
+         x.style.display = "none";
+         
+     }
+     
+ };
     
 count += 1;
     
@@ -138,7 +201,11 @@ count += 1;
 <br>
 <br>
 <br>
- 
+<br>
+<br>
+<br>
+<br>
+    
 {% endfor %}
     
 </body>

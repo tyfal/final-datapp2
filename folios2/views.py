@@ -260,6 +260,20 @@ def IncomeStatement(request, pk):
         pass
     
     return redirect('folios2:detail', s.portfolio)
+
+def Links(request, pk):
+    
+    try:
+        
+        s = Stock.objects.filter(pk=pk)[0]
+        
+        form_links(s)
+        
+    except:
+        
+        pass
+    
+    return redirect('folios2:detail', s.portfolio)
         
         
 @login_required(login_url='../login')

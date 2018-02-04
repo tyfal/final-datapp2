@@ -1,0 +1,4 @@
+<form action="{% url folios2:links stock.pk %}">
+    {% csrf_token %}<input type="hidden" name="stock_pk" value="{{ stock.pk }}">
+    <button type="submit">Get {{ stock.stock_symbol }} form links</button>
+</form>

@@ -48,6 +48,8 @@ class Stock(models.Model):
     income_statement_10k = models.CharField(max_length=100000, null=True, blank=True)
     
     income_statement_10q = models.CharField(max_length=100000, null=True, blank=True)
+    
+    form_links = models.CharField(max_length=5000, null=True, blank=True)
 
 
     def Financial(self):
