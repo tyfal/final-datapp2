@@ -273,7 +273,7 @@ def recentIS(s, form_type):
 
         form_links = get_form(ticker, form_type, priorto=priming['priorto'])[:priming['form_count']]
 
-        r = requests.get(form_links[0], timeout=.5)
+        r = requests.get(form_links[0], timeout=1)
 
         soup = BeautifulSoup(r.text,'html.parser')
 
