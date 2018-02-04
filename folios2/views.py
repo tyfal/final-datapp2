@@ -15,7 +15,7 @@ from django.views.generic import View
 from .forms import UserForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
-from income_statement import income_statement
+from income_statement import income_statement, form_links
 from django.core.urlresolvers import reverse_lazy
 
 
