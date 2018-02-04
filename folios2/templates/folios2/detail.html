@@ -137,9 +137,27 @@ var q_mo = ['September', 'June', 'March'];
 
 for (i=0; i<lLen; i++) {
     
-    var str = "{{ stock.portfolio.start_date }}"
+    var strStart = "{{ stock.portfolio.start_date }}";
     
-    var year = Number(str.substring(str.length-4,str.length)) + Math.floor(lLen/3) - Math.floor(i/3);
+    var strEnd = "{{ stock.portfolio.end_date }}";
+    
+    var endDate = Number(strEnd.substring(strEnd.length-4,strEnd.length));
+    
+    if ((new Date()).getFullYear() <= endDate) {
+        
+        if (((new Date()).getMonth() + 1) < 3) {
+        
+            endDate = (new Date()).getFullYear() - 1;
+            
+        } else {
+            
+            endDate = (new Date()).getFullYear();
+            
+        }        
+        
+    }
+    
+    var year = endDate - Math.floor(i/3);
     
     month = q_mo[i%3];
     
